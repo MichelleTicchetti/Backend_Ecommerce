@@ -1,22 +1,11 @@
 export class Product {
-  constructor(
-    id,
-    title,
-    descripton,
-    code,
-    price,
-    status,
-    stock,
-    category,
-    thumbnail
-  ) {
+  constructor(id, title, description, code, price, stock, category, thumbnail) {
     if (
       !id ||
       !title ||
-      !descripton ||
+      !description ||
       !code ||
       !price ||
-      !status ||
       !stock ||
       !category
     ) {
@@ -24,10 +13,10 @@ export class Product {
     }
     this.id = id;
     this.title = title;
-    this.descripton = descripton;
+    this.description = description;
     this.code = code;
     this.price = price;
-    this.status = status;
+    this.status = true;
     this.stock = stock;
     this.category = category;
     this.thumbnail = thumbnail;

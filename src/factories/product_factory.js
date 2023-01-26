@@ -3,24 +3,20 @@ import { Product } from "../models/product.js";
 export class ProductFactory {
   constructor() {}
 
-  create(
-    id,
-    title,
-    descripton,
-    code,
-    price,
-    status,
-    stock,
-    category,
-    thumbnail
-  ) {
+  create(id, title, description, code, price, stock, category, thumbnail) {
+    console.log(id);
+    console.log(title);
+    console.log(description);
+    console.log(code);
+    console.log(price);
+    console.log(stock);
+    console.log(category);
     if (
       !id ||
       !title ||
-      !descripton ||
+      !description ||
       !code ||
       !price ||
-      !status ||
       !stock ||
       !category
     ) {
@@ -29,10 +25,9 @@ export class ProductFactory {
       return new Product(
         id,
         title,
-        descripton,
+        description,
         code,
         price,
-        status,
         stock,
         category,
         thumbnail

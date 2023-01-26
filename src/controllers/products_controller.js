@@ -1,11 +1,20 @@
 import { ProductsUseCases } from "../use_cases/products.js";
 
+// http://localhost:8080/api/products?limit=1
 export const getProducts = async (req, res, next) => {
   console.log("ejecución caso de uso: listar productos");
 
+  const limit = req.query.limit;
+
   try {
     const responseRepo = await new ProductsUseCases().getAll();
-    res.status(200).json(responseRepo);
+    let result = responseRepo;
+
+    if (limit) {
+      result = responseRepo.slice(0, limit);
+    }
+
+    res.status(200).json(result);
   } catch (e) {
     res.status(500).json({ message: e.message });
   }
@@ -27,26 +36,15 @@ export const getProductById = async (req, res, next) => {
 export const createProduct = async (req, res, next) => {
   console.log("ejecución caso de uso: crear producto");
 
-  const {
-    id,
-    title,
-    descripton,
-    code,
-    price,
-    status,
-    stock,
-    category,
-    thumbnail,
-  } = req.body;
+  const { title, description, code, price, stock, category, thumbnail } =
+    req.body;
 
   try {
     const responseObject = await new ProductsUseCases().create(
-      id,
       title,
-      descripton,
+      description,
       code,
       price,
-      status,
       stock,
       category,
       thumbnail
@@ -77,10 +75,12 @@ export const updateProduct = async (req, res, next) => {
 export const deleteProductById = async (req, res, next) => {
   console.log("ejecución caso de uso: borrar producto por id");
 
-  const { id } = req.body;
+  const { id } = req.params;
 
   try {
-    const responseObject = await new ProductsUseCases().deleteById(id);
+    const responseObject = await new ProductsUseCases().deleteById(
+      parseInt(id)
+    );
     res.status(201).json(responseObject);
   } catch (e) {
     res.status(500).json({ message: e.message });

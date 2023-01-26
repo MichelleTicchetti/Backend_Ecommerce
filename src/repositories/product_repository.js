@@ -13,7 +13,14 @@ export class ProductRepository {
     this.storage.update(id, field, newValue);
   }
 
-  getAll() {
+  getAll(limit) {
+    let products = this.storage.getAll();
+    let result = products;
+
+    if (limit) {
+      result = products.slice(0, limit);
+    }
+
     return this.storage.getAll();
   }
 
@@ -22,7 +29,7 @@ export class ProductRepository {
   }
 
   deleteById(id) {
-    this.storage.deleteById(id);
+    return this.storage.deleteById(id);
   }
 
   deleteAll() {

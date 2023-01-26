@@ -1,20 +1,22 @@
 import express from "express";
+import morgan from "morgan";
 
 const app = express();
 const PORT = 8080;
 
-//configuración del servidor
+app.use(express.json());
+app.use(morgan("dev"));
+
+const productsRouter = await (await import("./routes/products.js")).default;
+
+app.use("/api/products/", productsRouter);
+
 const server = app.listen(PORT, () => {
   console.log(`Servidor express escuchando en el puerto: ${PORT}`);
 });
 
-//si tenemos un error
 server.on("error", (error) =>
   console.log(`Error en servidor: ${error.message}`)
 );
-
-const productsRouter = await (await import("./routes/products.js")).default;
-
-app.use("/products/", productsRouter);
 
 export default app;

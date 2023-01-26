@@ -9,17 +9,7 @@ export class ProductsFileStorage {
     try {
       const data = await fs.promises.readFile(`${this.path}`, "utf-8");
       const products = JSON.parse(data);
-      let idNewProduct = 1;
-
-      if (products.length >= 1) {
-        let indexLastProduct = products.length - 1;
-        let idLastProduct = products[indexLastProduct].id;
-        idNewProduct = idLastProduct + 1;
-      }
-
-      const newProduct = { id: idNewProduct, ...product };
-      products.push(newProduct);
-
+      products.push(product);
       await fs.promises.writeFile(`${this.path}`, JSON.stringify(products));
       return products;
     } catch (error) {
@@ -57,7 +47,6 @@ export class ProductsFileStorage {
 
   async getAll() {
     try {
-      console.log(this.path);
       const data = await fs.promises.readFile(`${this.path}`, "utf-8");
       const products = JSON.parse(data);
       return products;
@@ -84,12 +73,12 @@ export class ProductsFileStorage {
     try {
       const data = await fs.promises.readFile(`${this.path}`, "utf-8");
       const products = JSON.parse(data);
-      const newProducts = products.filter((product) => product.id !== id);
+      const newProductsList = products.filter((product) => product.id !== id);
       await fs.promises.writeFile(
         `./${this.path}`,
-        JSON.stringify(newProducts)
+        JSON.stringify(newProductsList)
       );
-      return newProducts;
+      return newProductsList;
     } catch (error) {
       console.log(error);
     }
