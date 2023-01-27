@@ -23,10 +23,10 @@ export const getProducts = async (req, res, next) => {
 export const getProductById = async (req, res, next) => {
   console.log("ejecución caso de uso: buscar producto por id ");
 
-  const { id } = req.params;
+  const { pid } = req.params;
 
   try {
-    const responseObject = await new ProductsUseCases().getById(parseInt(id));
+    const responseObject = await new ProductsUseCases().getById(parseInt(pid));
     res.status(201).json(responseObject);
   } catch (e) {
     res.status(500).json({ message: e.message });
@@ -58,7 +58,7 @@ export const createProduct = async (req, res, next) => {
 export const updateProduct = async (req, res, next) => {
   console.log("ejecución caso de uso: actualizar producto");
 
-  const { id } = req.params;
+  const { pid } = req.params;
   const { title, description, code, price, stock, category, thumbnail } =
     req.body;
   try {
@@ -71,7 +71,7 @@ export const updateProduct = async (req, res, next) => {
       category,
       thumbnail,
     };
-    const responseObject = await new ProductsUseCases().update(id, newContent);
+    const responseObject = await new ProductsUseCases().update(pid, newContent);
     res.status(201).json(responseObject);
   } catch (e) {
     res.status(500).json({ message: e.message });
@@ -81,11 +81,11 @@ export const updateProduct = async (req, res, next) => {
 export const deleteProductById = async (req, res, next) => {
   console.log("ejecución caso de uso: borrar producto por id");
 
-  const { id } = req.params;
+  const { pid } = req.params;
 
   try {
     const responseObject = await new ProductsUseCases().deleteById(
-      parseInt(id)
+      parseInt(pid)
     );
     res.status(201).json(responseObject);
   } catch (e) {

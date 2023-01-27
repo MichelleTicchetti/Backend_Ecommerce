@@ -4,13 +4,6 @@ export class ProductFactory {
   constructor() {}
 
   create(id, title, description, code, price, stock, category, thumbnail) {
-    console.log(id);
-    console.log(title);
-    console.log(description);
-    console.log(code);
-    console.log(price);
-    console.log(stock);
-    console.log(category);
     if (
       !id ||
       !title ||

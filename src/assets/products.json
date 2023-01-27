@@ -1,1 +1,1 @@
-[{"id":1,"title":"prueba","description":"papas con bacon y queso cheddar","code":"pap582","price":2000,"status":true,"stock":1000,"category":"papas"}]
+[{"id":1,"title":"hamburguesa gigante","description":"hamburguesa con triple carne y queso cheddar","code":"ham112","price":4590,"status":true,"stock":500,"category":"hamburguesa"},{"id":2,"title":"prueba 2","description":"papas con bacon y queso cheddar","code":"pap582","price":2000,"status":true,"stock":1000,"category":"papas"}]

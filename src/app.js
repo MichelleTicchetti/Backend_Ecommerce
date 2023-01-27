@@ -8,8 +8,10 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 const productsRouter = await (await import("./routes/products.js")).default;
+const cartsRouter = await (await import("./routes/carts.js")).default;
 
 app.use("/api/products/", productsRouter);
+app.use("/api/carts/", cartsRouter);
 
 const server = app.listen(PORT, () => {
   console.log(`Servidor express escuchando en el puerto: ${PORT}`);
