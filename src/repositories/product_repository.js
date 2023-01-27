@@ -6,11 +6,11 @@ export class ProductRepository {
   }
 
   create(product) {
-    this.storage.create(product);
+    return this.storage.create(product);
   }
 
-  update(id, field, newValue) {
-    this.storage.update(id, field, newValue);
+  update(id, newContent) {
+    return this.storage.update(id, newContent);
   }
 
   getAll(limit) {

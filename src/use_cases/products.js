@@ -47,8 +47,9 @@ export class ProductsUseCases {
     return product;
   }
 
-  async update(id, field, newValue) {
-    return new ProductRepository().update(id, field, newValue);
+  async update(id, newContent) {
+    const responseRepo = new ProductRepository().update(id, newContent);
+    return responseRepo;
   }
 
   async deleteById(id) {

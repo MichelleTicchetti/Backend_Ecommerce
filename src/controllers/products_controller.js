@@ -58,14 +58,20 @@ export const createProduct = async (req, res, next) => {
 export const updateProduct = async (req, res, next) => {
   console.log("ejecución caso de uso: actualizar producto");
 
-  const { id, field, newValue } = req.body;
-
+  const { id } = req.params;
+  const { title, description, code, price, stock, category, thumbnail } =
+    req.body;
   try {
-    const responseObject = await new ProductsUseCases().update(
-      id,
-      field,
-      newValue
-    );
+    const newContent = {
+      title,
+      description,
+      code,
+      price,
+      stock,
+      category,
+      thumbnail,
+    };
+    const responseObject = await new ProductsUseCases().update(id, newContent);
     res.status(201).json(responseObject);
   } catch (e) {
     res.status(500).json({ message: e.message });
