@@ -1,4 +1,4 @@
-import { ProductsUseCases } from "../use_cases/products.js";
+import { ProductsServices } from "../services/products.js";
 
 // http://localhost:8080/api/products?limit=1
 export const getProducts = async (req, res, next) => {
@@ -7,7 +7,7 @@ export const getProducts = async (req, res, next) => {
   const limit = req.query.limit;
 
   try {
-    const responseRepo = await new ProductsUseCases().getAll();
+    const responseRepo = await new ProductsServices().getAll();
     let result = responseRepo;
 
     if (limit) {
@@ -26,7 +26,7 @@ export const getProductById = async (req, res, next) => {
   const { pid } = req.params;
 
   try {
-    const responseObject = await new ProductsUseCases().getById(parseInt(pid));
+    const responseObject = await new ProductsServices().getById(parseInt(pid));
     res.status(201).json(responseObject);
   } catch (e) {
     res.status(500).json({ message: e.message });
@@ -40,7 +40,7 @@ export const createProduct = async (req, res, next) => {
     req.body;
 
   try {
-    const responseObject = await new ProductsUseCases().create(
+    const responseObject = await new ProductsServices().create(
       title,
       description,
       code,
@@ -71,7 +71,7 @@ export const updateProduct = async (req, res, next) => {
       category,
       thumbnail,
     };
-    const responseObject = await new ProductsUseCases().update(pid, newContent);
+    const responseObject = await new ProductsServices().update(pid, newContent);
     res.status(201).json(responseObject);
   } catch (e) {
     res.status(500).json({ message: e.message });
@@ -84,7 +84,7 @@ export const deleteProductById = async (req, res, next) => {
   const { pid } = req.params;
 
   try {
-    const responseObject = await new ProductsUseCases().deleteById(
+    const responseObject = await new ProductsServices().deleteById(
       parseInt(pid)
     );
     res.status(201).json(responseObject);
@@ -97,7 +97,7 @@ export const deleteAllProducts = async (req, res, next) => {
   console.log("ejecución caso de uso: borrar todos los productos");
 
   try {
-    const responseObject = await new ProductsUseCases().deleteAll();
+    const responseObject = await new ProductsServices().deleteAll();
     res.status(201).json(responseObject);
   } catch (e) {
     res.status(500).json({ message: e.message });

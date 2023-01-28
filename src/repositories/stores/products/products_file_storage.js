@@ -52,7 +52,7 @@ export class ProductsFileStorage {
         await fs.promises.writeFile(`./${this.path}`, JSON.stringify(products));
         return updatedProduct;
       } else {
-        return "Product to update wasn't found";
+        return "No se encontró el producto";
       }
     } catch (error) {
       console.log(error);

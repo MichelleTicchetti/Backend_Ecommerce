@@ -5,7 +5,7 @@ export class Cart {
     }
     this.id = id;
     this.subtotal = 0;
-    this.total = subtotal;
+    this.total = this.subtotal;
     this.fechaCreacion = Date();
     this.fechaModificacion = null;
     this.products = [];

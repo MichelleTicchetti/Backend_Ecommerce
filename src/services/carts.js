@@ -1,9 +1,13 @@
 import { CartFactory } from "../factories/cart_factory.js";
 import { CartRepository } from "../repositories/cart_repository.js";
 
-export class CartsUseCases {
+export class CartsServices {
   getAll() {
     return new CartRepository().getAll();
+  }
+
+  getById(id) {
+    return new CartRepository().getById(id);
   }
 
   getProducts(id) {
@@ -34,5 +38,15 @@ export class CartsUseCases {
   async addProduct(cid, pid) {
     const responseRepo = new CartRepository().addProduct(cid, pid);
     return responseRepo;
+  }
+
+  async deleteById(id) {
+    const responseRepo = new CartRepository();
+    return await responseRepo.deleteById(id);
+  }
+
+  async deleteAll() {
+    const responseRepo = new CartRepository();
+    await responseRepo.deleteAll();
   }
 }

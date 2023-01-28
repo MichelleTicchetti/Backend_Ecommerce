@@ -20,8 +20,7 @@ export class CartsFileStorage {
     try {
       const data = await fs.promises.readFile(`${this.path}`, "utf-8");
       const carts = JSON.parse(data);
-      const cart = carts.find((cart) => cart.id === id);
-
+      const cart = carts.find((cart) => cart.id === parseInt(id));
       if (cart) {
         return cart;
       }
@@ -30,13 +29,13 @@ export class CartsFileStorage {
     }
   }
 
-  async getAllProducts(id) {
+  async getProducts(id) {
     try {
       const cart = await this.getById(id);
       if (cart) {
         return cart.products;
       } else {
-        return "Cart wasn't found";
+        return "No se encontró el carrito";
       }
     } catch (error) {
       console.log(error);
@@ -113,8 +112,31 @@ export class CartsFileStorage {
         await fs.promises.writeFile(`./${this.path}`, JSON.stringify(carts));
         return updatedCart;
       } else {
-        return "Cart to update wasn't found";
+        return "No se encontró el carrito";
       }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async deleteById(id) {
+    try {
+      const data = await fs.promises.readFile(`${this.path}`, "utf-8");
+      const carts = JSON.parse(data);
+      const newCartsList = carts.filter((cart) => cart.id !== id);
+      await fs.promises.writeFile(
+        `./${this.path}`,
+        JSON.stringify(newCartsList)
+      );
+      return newCartsList;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async deleteAll() {
+    try {
+      await fs.promises.writeFile(`${this.path}`, "[]");
     } catch (error) {
       console.log(error);
     }

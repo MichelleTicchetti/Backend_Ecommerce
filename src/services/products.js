@@ -1,7 +1,7 @@
 import { ProductFactory } from "../factories/product_factory.js";
 import { ProductRepository } from "../repositories/product_repository.js";
 
-export class ProductsUseCases {
+export class ProductsServices {
   getAll() {
     return new ProductRepository().getAll();
   }

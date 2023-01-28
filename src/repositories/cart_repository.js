@@ -9,6 +9,10 @@ export class CartRepository {
     return this.storage.getAll();
   }
 
+  getById(id) {
+    return this.storage.getById(id);
+  }
+
   getAllProducts(id) {
     return this.storage.getProducts(id);
   }
@@ -19,5 +23,13 @@ export class CartRepository {
 
   addProduct(cid, pid) {
     return this.storage.addProduct(cid, pid);
+  }
+
+  deleteAll() {
+    return this.storage.deleteAll();
+  }
+
+  deleteById(id) {
+    return this.storage.deleteById(id);
   }
 }
